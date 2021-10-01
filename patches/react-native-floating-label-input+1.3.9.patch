@@ -1,0 +1,39 @@
+diff --git a/node_modules/react-native-floating-label-input/src/index.tsx b/node_modules/react-native-floating-label-input/src/index.tsx
+index 7b2733b..3f39e73 100644
+--- a/node_modules/react-native-floating-label-input/src/index.tsx
++++ b/node_modules/react-native-floating-label-input/src/index.tsx
+@@ -455,10 +455,16 @@ const FloatingLabelInput: React.ForwardRefRenderFunction<InputRef, Props> = (
+   }
+ 
+   function setFocus() {
++    if(!rest.editable) {
++      return;
++    }
+     inputRef.current?.focus();
+   }
+ 
+   function setBlur() {
++    if(!rest.editable) {
++      return;
++    }
+     inputRef.current?.blur();
+   }
+ 
+@@ -687,7 +693,7 @@ const FloatingLabelInput: React.ForwardRefRenderFunction<InputRef, Props> = (
+   }
+ 
+   return (
+-    <TouchableWithoutFeedback onPress={setFocus} onLayout={onLayout}>
++    <View onLayout={onLayout}>
+       <View style={{ flexDirection: 'row' }}>
+         {staticLabel && (
+           <AnimatedText
+@@ -774,7 +780,7 @@ const FloatingLabelInput: React.ForwardRefRenderFunction<InputRef, Props> = (
+           )}
+         </View>
+       </View>
+-    </TouchableWithoutFeedback>
++    </View>
+   );
+ };
+ export { setGlobalStyles };

@@ -1,0 +1,18 @@
+import Text from 'components/Text';
+import React from 'react';
+import {View} from 'react-native';
+import {c, l} from 'styles/shared';
+
+const ListHeader = React.memo(
+  ({total, name}: {total: number; name: string}) => {
+    return (
+      <View style={[{borderBottomColor: c.green800, borderBottomWidth: 1}]}>
+        <Text style={[l.mx20, l.my10]}>
+          Tổng số {total} đơn {name.toLowerCase()}
+        </Text>
+      </View>
+    );
+  },
+);
+
+export default React.memo(ListHeader);

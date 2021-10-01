@@ -1,0 +1,18 @@
+diff --git a/node_modules/rn-tourguide/lib/components/SvgMask.js b/node_modules/rn-tourguide/lib/components/SvgMask.js
+index 2752cc0..6a66505 100644
+--- a/node_modules/rn-tourguide/lib/components/SvgMask.js
++++ b/node_modules/rn-tourguide/lib/components/SvgMask.js
+@@ -1,10 +1,11 @@
+ import React, { Component } from 'react';
+-import { Animated, Dimensions, Easing, Platform, View, } from 'react-native';
++import { Animated, Dimensions, Easing, Platform, View, StatusBar} from 'react-native';
+ import Svg from 'react-native-svg';
+ import { svgMaskPathMorph } from '../utilities';
+ import { AnimatedSvgPath } from './AnimatedPath';
+ const windowDimensions = Dimensions.get('window');
+-const FIRST_PATH = `M0,0H${windowDimensions.width}V${windowDimensions.height}H0V0ZM${windowDimensions.width / 2},${windowDimensions.height / 2} h 1 v 1 h -1 Z`;
++const FIRST_PATH = `M0,0H${windowDimensions.width}V${windowDimensions.height + StatusBar.currentHeight}H0V0ZM${windowDimensions.width / 2},${windowDimensions.height / 2} h 1 v 1 h -1 Z`;
++
+ const IS_WEB = Platform.OS !== 'web';
+ let SvgMask = (() => {
+     class SvgMask extends Component {

@@ -1,0 +1,27 @@
+name: Build Release Android-iOS Files
+on:
+  push:
+    tags:
+      - v*.* # Push events to v1.0, v1.1, and v1.9 tags
+jobs:
+  build-android:
+    name: Build Android & Upload apk file to Firebase Distribution
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '12'
+      - name: Install dependencies
+        run: |
+          yarn install
+      - name: Build Android Release
+        run: |
+          yarn run deploy_android
+      - name: Upload APK file to Firebase Distribution
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
+        with:
+          appId: ${{secrets.FIREBASE_APP_ID}}
+          token: ${{secrets.FIREBASE_TOKEN}}
+          groups: abubu-testers
+          file: android/app/build/outputs/apk/release/app-release.apk
